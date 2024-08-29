@@ -60,7 +60,7 @@ const Signup = () => {
     <main className=" mt-6 mr-10">
       <section className=" flex justify-between items-center">
         <Link
-          to={""}
+          to={"/"}
           className=" text-[#4169E1] text-[16px] font-semibold flex items-center gap-2"
         >
           <span>
