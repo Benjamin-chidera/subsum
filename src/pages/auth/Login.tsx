@@ -1,18 +1,58 @@
 import React, { useState } from "react";
 import { IoIosArrowBack } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import google from "../../assets/images/auth/google.png";
 import { InputText } from "primereact/inputtext";
 import { InputSwitch } from "primereact/inputswitch";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import { useGlobalAuthContext } from "../../context/authContext";
+import { useForm, SubmitHandler } from "react-hook-form";
+import axios from "axios";
+import cookie from "js-cookie";
+
+type FormInputs = {
+  email: string;
+  password: string;
+};
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [checked, setChecked] = useState(false);
+  const redirect = useNavigate();
+  // const token = cookie.get("token");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormInputs>();
+
+  const auth = useGlobalAuthContext();
+
+  if (!auth) {
+    return null;
+  }
+
+  const { handleGoogle } = auth;
 
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
+
+  const handleLogin: SubmitHandler<FormInputs> = async (datas) => {
+    const { data } = await axios.post("http://localhost:3000/auth/signin", {
+      ...datas,
+    });
+
+    cookie.set("token", data.token);
+
+    setTimeout(() => {
+      redirect("/dashboard");
+    }, 2000);
+  };
+
+  // if (token) {
+  //   return redirect("/dashboard");
+  // }
 
   return (
     <main className=" mt-6 mr-10">
@@ -38,7 +78,10 @@ const Login = () => {
       <section className=" text-center mt-10">
         <p className=" text-[#4C689E] font-medium text-xl">Login</p>
 
-        <button className=" mt-5 flex justify-center items-center gap-7 bg-white  w-[400px] py-3 rounded-xl font-semibold text-[#1D1C2B] mx-auto shadow-xl shadow-[#D7E1F4]">
+        <button
+          className=" mt-5 flex justify-center items-center gap-7 bg-white  w-[400px] py-3 rounded-xl font-semibold text-[#1D1C2B] mx-auto shadow-xl shadow-[#D7E1F4]"
+          onClick={handleGoogle}
+        >
           <span>
             <img src={google} alt="" />
           </span>
@@ -52,7 +95,10 @@ const Login = () => {
         </div>
 
         <div className=" mt-4 bg-white shadow-xl shadow-[#D7E1F4] w-fit p-8 rounded-xl mx-auto">
-          <form className="w-[400px] mx-auto space-y-3">
+          <form
+            className="w-[400px] mx-auto space-y-3"
+            onSubmit={handleSubmit(handleLogin)}
+          >
             <div className="w-full text-start space-y-1">
               <label htmlFor="email" className="text-[15px] text-[#6882B6]">
                 Email Address
@@ -62,7 +108,12 @@ const Login = () => {
                 type="email"
                 className="border border-[#D7E1F4] w-full py-2 px-2 outline-none rounded-lg text-[#2B3B5A]"
                 placeholder="wabdotmail@gmail.com"
+                {...register("email", { required: true })}
               />
+
+              {errors.email && (
+                <p className=" text-[10px]">Please enter your email address</p>
+              )}
             </div>
 
             <div className="w-full text-start space-y-1 relative">
@@ -74,9 +125,10 @@ const Login = () => {
                 type={!showPassword ? "password" : "text"}
                 className="border border-[#D7E1F4] w-full py-2 px-2 pr-8 outline-none rounded-lg text-[#2B3B5A]"
                 placeholder="Gabon4351"
+                {...register("password", { required: true })}
               />
 
-              <div className=" absolute bottom-2 right-3 text-[#4169E1]">
+              <div className=" absolute top-9 right-3 text-[#4169E1]">
                 {showPassword ? (
                   <button onClick={handleShowPassword} type="button">
                     <FiEyeOff />
@@ -87,6 +139,10 @@ const Login = () => {
                   </button>
                 )}
               </div>
+
+              {errors.email && (
+                <p className=" text-[10px]">Please enter your password</p>
+              )}
             </div>
 
             <div className=" flex justify-between items-center">

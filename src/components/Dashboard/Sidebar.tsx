@@ -2,7 +2,7 @@ import logo from "../../assets/images/logo.png";
 import { MdElectricBolt, MdSpaceDashboard } from "react-icons/md";
 import { BiSupport } from "react-icons/bi";
 import { MdLogout } from "react-icons/md";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   IoIosArrowDown,
   IoIosArrowForward,
@@ -11,15 +11,32 @@ import {
 } from "react-icons/io";
 import { FiTv } from "react-icons/fi";
 import { LuArrowUpLeftFromCircle, LuNewspaper } from "react-icons/lu";
+import cookie from "js-cookie";
 
 import mtn from "../../assets/images/dashboard/mtn.png";
 import airtel from "../../assets/images/dashboard/airtel.png";
 import ninemobile from "../../assets/images/dashboard/9mobile.png";
 import { useState } from "react";
+import { useGlobalAuthContext } from "../../context/authContext";
 
 export default function Sidebar() {
   const location = useLocation();
   const [showNetwork, setShowNetwork] = useState<boolean>(false);
+  const redirect = useNavigate();
+
+  const auth = useGlobalAuthContext();
+
+  if (!auth) {
+    return null;
+  }
+
+  const handleLogout = () => {
+    cookie.remove("token");
+
+    setTimeout(() => {
+      redirect("/login");
+    }, 1000);
+  };
 
   return (
     <div className="w-64 bg-[#EFF3FB] h-screen fixed top-0 left-0">
@@ -174,8 +191,7 @@ export default function Sidebar() {
         <Link
           to={"/dashboard/help"}
           className={`flex items-center mx-3 py-2 px-4 text-[#4C689E] rounded-md hover:bg-gray-200 font-medium text-[16px] ${
-            location.pathname === "/dashboard/help" &&
-            "bg-[#4169E1] text-white"
+            location.pathname === "/dashboard/help" && "bg-[#4169E1] text-white"
           }`}
           onClick={() => {
             setShowNetwork(false);
@@ -185,8 +201,7 @@ export default function Sidebar() {
             <BiSupport
               size={20}
               className={` text-[#6882B6] ${
-                location.pathname === "/dashboard/help" &&
-                " text-white"
+                location.pathname === "/dashboard/help" && " text-white"
               }`}
             />
           </p>
@@ -195,7 +210,10 @@ export default function Sidebar() {
       </nav>
 
       <div className="absolute bottom-0 left-0 w-full p-4">
-        <button className="flex items-center mx-3 py-2 px-4 text-[#4C689E] rounded-md hover:bg-gray-200 font-medium text-[16px]">
+        <button
+          className="flex items-center mx-3 py-2 px-4 text-[#4C689E] rounded-md hover:bg-gray-200 font-medium text-[16px]"
+          onClick={handleLogout}
+        >
           <p className="mr-3">
             <MdLogout />
           </p>

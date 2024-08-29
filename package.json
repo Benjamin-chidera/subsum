@@ -13,6 +13,8 @@
     "@tanstack/react-table": "^8.20.5",
     "axios": "^1.7.5",
     "client": "file:",
+    "js-cookie": "^3.0.5",
+    "jwt-decode": "^4.0.0",
     "primeicons": "^7.0.0",
     "primereact": "^10.8.2",
     "react": "^18.3.1",
@@ -25,6 +27,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
+    "@types/js-cookie": "^3.0.6",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
