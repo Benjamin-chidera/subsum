@@ -1,4 +1,3 @@
-import React from "react";
 import questions from "../../assets/images/dashboard/questions.png";
 import chat from "../../assets/images/dashboard/chat.png";
 import whatsapp from "../../assets/images/dashboard/whatsapp.png";
