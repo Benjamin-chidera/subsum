@@ -39,9 +39,12 @@ const Login = () => {
   };
 
   const handleLogin: SubmitHandler<FormInputs> = async (datas) => {
-    const { data } = await axios.post("http://localhost:3000/auth/signin", {
-      ...datas,
-    });
+    const { data } = await axios.post(
+      "https://subsum-server-nofz.onrender.com/auth/signin",
+      {
+        ...datas,
+      }
+    );
 
     cookie.set("token", data.token);
 

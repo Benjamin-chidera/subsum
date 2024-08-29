@@ -10,7 +10,10 @@ export const useGlobalAuthContext = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const handleGoogle = () => {
-    window.open("http://localhost:3000/auth/google/callback", "_self");
+    window.open(
+      "https://subsum-server-nofz.onrender.com/auth/google/callback",
+      "_self"
+    );
   };
 
   return (

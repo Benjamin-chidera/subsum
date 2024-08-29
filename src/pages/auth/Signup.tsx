@@ -39,9 +39,12 @@ const Signup = () => {
   };
 
   const handleSignup: SubmitHandler<FormInputs> = async (datas) => {
-    const { data } = await axios.post("http://localhost:3000/auth/signup", {
-      ...datas,
-    });
+    const { data } = await axios.post(
+      "https://subsum-server-nofz.onrender.com/auth/signup",
+      {
+        ...datas,
+      }
+    );
 
     cookie.set("token", data.token);
     setTimeout(() => {
