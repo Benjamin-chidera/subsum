@@ -1,5 +1,5 @@
 import { InputText } from "primereact/inputtext";
-import React, { useState } from "react";
+import { useState } from "react";
 
 import mtn from "../../assets/images/dashboard/mtn.png";
 import airtel from "../../assets/images/dashboard/airtel.png";
