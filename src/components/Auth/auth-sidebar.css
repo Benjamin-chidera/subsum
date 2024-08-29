@@ -1,0 +1,5 @@
+.sidebar {
+  background-image: url("/src/assets/images/auth/login-bg.png");
+  /* background-size: contain; */
+  background-repeat: no-repeat;
+}
