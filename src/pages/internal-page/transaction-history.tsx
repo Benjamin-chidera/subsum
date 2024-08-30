@@ -1,7 +1,6 @@
 import { BsFilter } from "react-icons/bs";
 import transactionHistoryData from "../../assets/data/transactionHistory";
 import { useState } from "react";
-import { FormatCurrency } from "../../assets/data/currency";
 import initiated from "../../assets/images/auth/initiated.png";
 import success from "../../assets/images/auth/success.png";
 import failed from "../../assets/images/auth/failed.png";
