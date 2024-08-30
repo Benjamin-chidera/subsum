@@ -217,7 +217,7 @@ const TransactionHistory = () => {
                   }}
                 >
                   {" "}
-                  {FormatCurrency(transaction.amount)}
+                  ₦{transaction.amount}
                 </td>
                 <td
                   style={{
@@ -227,7 +227,7 @@ const TransactionHistory = () => {
                     fontWeight: 500,
                   }}
                 >
-                  {FormatCurrency(transaction.totalAmount)}
+                  ₦{transaction.totalAmount}
                 </td>
                 <td
                   style={{
