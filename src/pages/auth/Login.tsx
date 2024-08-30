@@ -3,9 +3,9 @@ import { IoIosArrowBack } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
 import google from "../../assets/images/auth/google.png";
 import { InputText } from "primereact/inputtext";
-import { InputSwitch } from "primereact/inputswitch";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { useForm, SubmitHandler } from "react-hook-form";
+import "./auth.css";
 
 type FormInputs = {
   email: string;
@@ -14,7 +14,6 @@ type FormInputs = {
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [checked, setChecked] = useState(false);
   const redirect = useNavigate();
 
   const {
@@ -125,18 +124,22 @@ const Login = () => {
             </div>
 
             <div className=" flex justify-between items-center">
-              <div className="flex items-center gap-2">
-                <InputSwitch
-                  checked={checked}
-                  onChange={(e) => setChecked(e.value)}
-                  required
-                />
+              <div className="flex items-center">
+                <div className="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                  <input
+                    type="checkbox"
+                    name="toggle"
+                    id="toggle"
+                    className="toggle-checkbox absolute block w-5 h-5 rounded-full bg-[#FFFFFF] border-2 birder-[#EFF3FB] appearance-none cursor-pointer"
+                  />
+                  <label
+                    htmlFor="toggle"
+                    className="toggle-label block overflow-hidden h-5 rounded-full bg-[#EFF3FB] cursor-pointer"
+                  ></label>
+                </div>
 
-                <label
-                  htmlFor="password"
-                  className="text-[15px] text-[#6882B6]"
-                >
-                  Password
+                <label htmlFor="toggle" className="text-[14px] text-[#6882B6]">
+                  Remember me
                 </label>
               </div>
 
