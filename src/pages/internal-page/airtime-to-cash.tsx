@@ -79,7 +79,7 @@ const AirtimeToCash = () => {
                 <button
                   id="network-select"
                   type="button"
-                  className="w-full py-2 px-3 border rounded-lg flex items-center justify-between outline-none text-sm"
+                  className="w-full py-2 px-3 border rounded-lg flex items-center justify-between outline-none text-sm  bg-[#FFFFFF]"
                   onClick={() => setIsOpen(!isOpen)}
                 >
                   {selectedNetwork ? (
@@ -129,7 +129,7 @@ const AirtimeToCash = () => {
               </label>
               <InputText
                 type="tel"
-                className="border w-full py-2 px-2 outline-none rounded-lg"
+                className="border w-full py-2 px-2 outline-none rounded-lg bg-[#FFFFFF]"
               />
             </div>
           </div>
@@ -140,7 +140,7 @@ const AirtimeToCash = () => {
             </label>
             <InputText
               type="number"
-              className="border w-full py-2 px-2 outline-none rounded-lg"
+              className="border w-full py-2 px-2 outline-none rounded-lg  bg-[#FFFFFF]"
             />
           </div>
 
@@ -150,7 +150,7 @@ const AirtimeToCash = () => {
             </label>
             <InputText
               type="tel"
-              className="border w-full py-2 px-2 outline-none rounded-lg"
+              className="border w-full py-2 px-2 outline-none rounded-lg bg-[#FFFFFF]"
             />
           </div>
 

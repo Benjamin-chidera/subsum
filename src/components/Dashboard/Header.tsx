@@ -9,7 +9,7 @@ export default function Header() {
 
   const titles: { [key: string]: string } = useMemo(
     () => ({
-      "/dashboard": `Welcome, `,
+      "/dashboard": `Welcome, Lawal Wahab`,
       "/dashboard/help": "Help And Support",
       "/dashboard/airtime-to-cash": "Airtime to Cash",
       "/dashboard/transaction-history": "Transaction History",

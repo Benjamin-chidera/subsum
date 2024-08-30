@@ -54,7 +54,7 @@ const Profile: React.FC = () => {
 
   return (
     <main>
-      <form className="flex gap-10" onSubmit={handleSubmit(onSubmit)}>
+      <form className="xl:flex gap-10" onSubmit={handleSubmit(onSubmit)}>
         <section className="space-y-6">
           <div className="border px-4 py-6 text-center flex flex-col justify-center rounded-2xl w-[500px]">
             {/* Selecting and previewing images */}

@@ -48,7 +48,7 @@ const help = [
 const HelpAndSupport = () => {
   return (
     <main>
-      <section className="grid grid-cols-2 gap-5 w-[70%]">
+      <section className="grid grid-cols-2 gap-5 xl:w-[70%]">
         {help.map((item, i) => (
           <section
             key={i}

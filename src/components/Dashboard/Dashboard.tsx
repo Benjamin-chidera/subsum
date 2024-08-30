@@ -5,9 +5,9 @@ import { IoWalletOutline } from "react-icons/io5";
 
 export default function Dashboard() {
   return (
-    <main className=" grid grid-cols-2  gap-7 ">
+    <main className=" grid lg:grid-cols-2  gap-7 ">
       <section className=" space-y-6 w-full">
-        <div className="flex justify-between border p-4 rounded-xl ">
+        <div className="xl:flex justify-between border p-4 rounded-xl ">
           <div>
             <p className=" text-[#3C517C] text-[16px] font-[400]">
               Wallet Balance

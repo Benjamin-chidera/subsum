@@ -2,6 +2,9 @@ import { BsFilter } from "react-icons/bs";
 import transactionHistoryData from "../../assets/data/transactionHistory";
 import { useState } from "react";
 import { FormatCurrency } from "../../assets/data/currency";
+import initiated from "../../assets/images/auth/initiated.png";
+import success from "../../assets/images/auth/success.png";
+import failed from "../../assets/images/auth/failed.png";
 
 interface Transaction {
   id: number;
@@ -77,6 +80,7 @@ const TransactionHistory = () => {
             borderCollapse: "collapse",
             marginBottom: "20px",
           }}
+          className=" overflow-x-scroll xl:overflow-hidden"
         >
           <thead>
             <tr>
@@ -172,10 +176,37 @@ const TransactionHistory = () => {
                     fontSize: "14px",
                     fontWeight: 500,
                   }}
+                  className="flex items-center gap-2"
                 >
-                  <p>{transaction.service}</p>
+                  {transaction.status === "Initiated" && (
+                    <img
+                      src={initiated}
+                      alt="service-status"
+                      className="w-7 h-7"
+                    />
+                  )}
 
-                  <p className=" font-[400]">{transaction.phoneNumber}</p>
+                  {transaction.status === "Successful" && (
+                    <img
+                      src={success}
+                      alt="service-status"
+                      className="w-7 h-7"
+                    />
+                  )}
+
+                  {transaction.status === "Failed" && (
+                    <img
+                      src={failed}
+                      alt="service-status"
+                      className="w-7 h-7"
+                    />
+                  )}
+
+                  <div>
+                    <p>{transaction.service}</p>
+
+                    <p className=" font-[400]">{transaction.phoneNumber}</p>
+                  </div>
                 </td>
                 <td
                   style={{

@@ -1,5 +1,5 @@
 import logo from "../../assets/images/logo.png";
-import { MdElectricBolt, MdSpaceDashboard } from "react-icons/md";
+import { MdDashboard, MdElectricBolt } from "react-icons/md";
 import { BiSupport } from "react-icons/bi";
 import { MdLogout } from "react-icons/md";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -10,12 +10,13 @@ import {
   IoIosWifi,
 } from "react-icons/io";
 import { FiTv } from "react-icons/fi";
-import { LuArrowUpLeftFromCircle, LuNewspaper } from "react-icons/lu";
+import { LuNewspaper } from "react-icons/lu";
 
 import mtn from "../../assets/images/dashboard/mtn.png";
 import airtel from "../../assets/images/dashboard/airtel.png";
 import ninemobile from "../../assets/images/dashboard/9mobile.png";
 import { useState } from "react";
+import { PiArrowsCounterClockwise } from "react-icons/pi";
 
 export default function Sidebar() {
   const location = useLocation();
@@ -34,7 +35,7 @@ export default function Sidebar() {
         <img src={logo} alt="Logo" className="h-8 w-40" />
       </div>
 
-      <nav className="mt-6 flex justify-center flex-col gap-8">
+      <nav className="mt-3 2xl:mt-6 flex justify-center flex-col gap-8">
         <Link
           to={"/dashboard"}
           className={`flex items-center mx-3 py-2 px-4 text-[#4C689E] rounded-md hover:bg-gray-200 font-medium text-[16px] ${
@@ -45,7 +46,7 @@ export default function Sidebar() {
           }}
         >
           <p className="mr-3">
-            <MdSpaceDashboard
+            <MdDashboard
               size={20}
               className={` text-[#6882B6] ${
                 location.pathname === "/dashboard" && " text-white"
@@ -131,13 +132,23 @@ export default function Sidebar() {
             }}
           >
             <p className="mr-3">
-              <LuArrowUpLeftFromCircle
-                size={20}
-                className={` text-[#6882B6] ${
-                  location.pathname === "/dashboard/airtime-to-cash" &&
-                  " text-white"
-                }`}
-              />
+              {!showNetwork ? (
+                <PiArrowsCounterClockwise
+                  size={20}
+                  className={` text-[#6882B6] ${
+                    location.pathname === "/dashboard/airtime-to-cash" &&
+                    " text-white"
+                  }`}
+                />
+              ) : (
+                <MdLogout
+                  size={20}
+                  className={` text-[#6882B6] ${
+                    location.pathname === "/dashboard/airtime-to-cash" &&
+                    " text-white"
+                  }`}
+                />
+              )}
             </p>
             Airtime to Cash
           </Link>
