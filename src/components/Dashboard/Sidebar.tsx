@@ -11,31 +11,21 @@ import {
 } from "react-icons/io";
 import { FiTv } from "react-icons/fi";
 import { LuArrowUpLeftFromCircle, LuNewspaper } from "react-icons/lu";
-import cookie from "js-cookie";
 
 import mtn from "../../assets/images/dashboard/mtn.png";
 import airtel from "../../assets/images/dashboard/airtel.png";
 import ninemobile from "../../assets/images/dashboard/9mobile.png";
 import { useState } from "react";
-import { useGlobalAuthContext } from "../../context/authContext";
 
 export default function Sidebar() {
   const location = useLocation();
   const [showNetwork, setShowNetwork] = useState<boolean>(false);
   const redirect = useNavigate();
 
-  const auth = useGlobalAuthContext();
-
-  if (!auth) {
-    return null;
-  }
-
   const handleLogout = () => {
-    cookie.remove("token");
+    console.log("LOGGED OUT");
 
-    setTimeout(() => {
-      redirect("/login");
-    }, 1000);
+    redirect("/login");
   };
 
   return (

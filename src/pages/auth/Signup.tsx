@@ -5,9 +5,6 @@ import google from "../../assets/images/auth/google.png";
 import { InputText } from "primereact/inputtext";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import axios from "axios";
-import cookie from "js-cookie";
-import { useGlobalAuthContext } from "../../context/authContext";
 
 type FormInputs = {
   email: string;
@@ -19,42 +16,22 @@ type FormInputs = {
 const Signup = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const redirect = useNavigate();
-  // const token = cookie.get("token");
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormInputs>();
 
-  const auth = useGlobalAuthContext();
-
-  if (!auth) {
-    return null;
-  }
-
-  const { handleGoogle } = auth;
-
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleSignup: SubmitHandler<FormInputs> = async (datas) => {
-    const { data } = await axios.post(
-      "https://subsum-server-nofz.onrender.com/auth/signup",
-      {
-        ...datas,
-      }
-    );
+  const handleSignup: SubmitHandler<FormInputs> = async (data) => {
+    console.log(data);
 
-    cookie.set("token", data.token);
-    setTimeout(() => {
-      redirect("/dashboard");
-    }, 2000);
+    redirect("/dashboard");
   };
-
-  //  if (token) {
-  //    return redirect("/dashboard");
-  //  }
 
   return (
     <main className=" mt-6 mr-10">
@@ -82,7 +59,7 @@ const Signup = () => {
 
         <button
           className=" mt-5 flex justify-center items-center gap-7 bg-white  w-[400px] py-3 rounded-xl font-semibold text-[#1D1C2B] mx-auto shadow-xl shadow-[#D7E1F4]"
-          onClick={handleGoogle}
+          onClick={() => console.log("GOOGLE AUTH")}
         >
           <span>
             <img src={google} alt="" />

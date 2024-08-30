@@ -5,10 +5,7 @@ import google from "../../assets/images/auth/google.png";
 import { InputText } from "primereact/inputtext";
 import { InputSwitch } from "primereact/inputswitch";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import { useGlobalAuthContext } from "../../context/authContext";
 import { useForm, SubmitHandler } from "react-hook-form";
-import axios from "axios";
-import cookie from "js-cookie";
 
 type FormInputs = {
   email: string;
@@ -19,43 +16,22 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [checked, setChecked] = useState(false);
   const redirect = useNavigate();
-  // const token = cookie.get("token");
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormInputs>();
 
-  const auth = useGlobalAuthContext();
-
-  if (!auth) {
-    return null;
-  }
-
-  const { handleGoogle } = auth;
-
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleLogin: SubmitHandler<FormInputs> = async (datas) => {
-    const { data } = await axios.post(
-      "https://subsum-server-nofz.onrender.com/auth/signin",
-      {
-        ...datas,
-      }
-    );
+  const handleLogin: SubmitHandler<FormInputs> = async (data) => {
+    console.log(data);
 
-    cookie.set("token", data.token);
-
-    setTimeout(() => {
-      redirect("/dashboard");
-    }, 2000);
+    redirect("/dashboard");
   };
-
-  // if (token) {
-  //   return redirect("/dashboard");
-  // }
 
   return (
     <main className=" mt-6 mr-10">
@@ -83,7 +59,7 @@ const Login = () => {
 
         <button
           className=" mt-5 flex justify-center items-center gap-7 bg-white  w-[400px] py-3 rounded-xl font-semibold text-[#1D1C2B] mx-auto shadow-xl shadow-[#D7E1F4]"
-          onClick={handleGoogle}
+          onClick={() => console.log("GOOGLE AUTH")}
         >
           <span>
             <img src={google} alt="" />
@@ -143,7 +119,7 @@ const Login = () => {
                 )}
               </div>
 
-              {errors.email && (
+              {errors.password && (
                 <p className=" text-[10px]">Please enter your password</p>
               )}
             </div>
@@ -153,6 +129,7 @@ const Login = () => {
                 <InputSwitch
                   checked={checked}
                   onChange={(e) => setChecked(e.value)}
+                  required
                 />
 
                 <label

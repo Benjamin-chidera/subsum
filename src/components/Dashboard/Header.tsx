@@ -1,46 +1,20 @@
 import { VscBell } from "react-icons/vsc";
 import { FaRegUser } from "react-icons/fa";
 import { useLocation, useNavigate } from "react-router-dom";
-import { jwtDecode } from "jwt-decode";
-import cookie from "js-cookie";
 import { useMemo } from "react";
-
-interface DecodedToken {
-  firstName: string;
-  lastName: string;
-  // Add other properties from your JWT token here
-}
 
 export default function Header() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const token = cookie.get("token");
-
-  const decodedToken = useMemo(() => {
-    if (token) {
-      try {
-        return jwtDecode(token) as DecodedToken;
-      } catch (error) {
-        console.error("Error decoding token:", error);
-        return null;
-      }
-    }
-    return null;
-  }, [token]);
-
-  console.log(decodedToken);
-
   const titles: { [key: string]: string } = useMemo(
     () => ({
-      "/dashboard": `Welcome, ${decodedToken?.firstName || "User"} ${
-        decodedToken?.lastName || "User"
-      }`,
+      "/dashboard": `Welcome, `,
       "/dashboard/help": "Help And Support",
       "/dashboard/airtime-to-cash": "Airtime to Cash",
       "/dashboard/transaction-history": "Transaction History",
     }),
-    [decodedToken]
+    []
   );
 
   const currentTitle = titles[location.pathname] || "";
